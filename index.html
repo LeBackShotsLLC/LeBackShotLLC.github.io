@@ -73,8 +73,8 @@
             position: relative;
             width: 100%;
             padding-top: 100%; 
-            overflow: hidden; /* Clips the image only */
-            border-radius: 1.3rem; /* Matches frame rounding */
+            overflow: hidden; 
+            border-radius: 1.3rem; 
         }
 
         .image-container img {
@@ -104,20 +104,92 @@
             white-space: nowrap;
             animation: marquee 20s linear infinite;
         }
+
+        /* Panic Screen Styling */
+        #panicScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            color: black;
+            z-index: 9999;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            overflow: auto;
+            padding: 20px;
+        }
+        .excel-table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 12px;
+        }
+        .excel-table th, .excel-table td {
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            text-align: left;
+        }
+        .excel-header {
+            background: #e6e6e6;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center">
 
-    <!-- Stock Ticker at Top -->
-    <div class="w-full bg-slate-950 border-b border-slate-800 py-2 overflow-hidden">
-        <div class="animate-marquee">
-            <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-GLUCK: +15.4% ▲</span>
-            <span class="text-[10px] font-bold text-red-400 mx-4">LBS-JOE: -2.1% ▼</span>
-            <span class="text-[10px] font-bold text-emerald-400 mx-4">LBS-RYAN: +42.8% ▲</span>
-            <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-KEV: HOLD</span>
-            <span class="text-[10px] font-bold text-purple-400 mx-4">LBS-MEEK: EXPONENTIAL</span>
-            <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-MIKE: VOLATILE</span>
-            <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-GLUCK: +15.4% ▲</span>
+    <!-- Panic Screen (Excel Sheet) -->
+    <div id="panicScreen" onclick="togglePanic()">
+        <div class="flex items-center gap-4 mb-4 border-b pb-2">
+            <div class="bg-green-700 text-white px-3 py-1 font-bold">XLSX</div>
+            <h1 class="text-xl font-bold">Q1_Fiscal_Projections_Final_v2.xlsx</h1>
+        </div>
+        <table class="excel-table">
+            <tr class="excel-header">
+                <td></td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td>
+            </tr>
+            <tr>
+                <td class="excel-header">1</td><td class="font-bold">Quarter</td><td class="font-bold">Revenue</td><td class="font-bold">Overhead</td><td class="font-bold">Margin</td><td class="font-bold">Growth</td><td class="font-bold">Notes</td>
+            </tr>
+            <tr>
+                <td class="excel-header">2</td><td>Q1 2026</td><td>$1,450,000</td><td>$840,000</td><td>42%</td><td>+12.4%</td><td>Steady progress</td>
+            </tr>
+            <tr>
+                <td class="excel-header">3</td><td>Q2 2026 (Est)</td><td>$1,620,000</td><td>$890,000</td><td>45%</td><td>+11.7%</td><td>Projected scaling</td>
+            </tr>
+            <tr>
+                <td class="excel-header">4</td><td>Q3 2026 (Est)</td><td>$1,890,000</td><td>$910,000</td><td>51%</td><td>+16.6%</td><td>Market expansion</td>
+            </tr>
+            <tr>
+                <td class="excel-header">5</td><td>Compliance</td><td>Passed</td><td>-</td><td>-</td><td>-</td><td>Audit complete</td>
+            </tr>
+            <tr>
+                <td class="excel-header">6</td><td>Amortization</td><td>($45,000)</td><td>-</td><td>-</td><td>-</td><td>Standard</td>
+            </tr>
+        </table>
+        <p class="mt-4 text-gray-400 italic text-xs">Click anywhere to return to Dashboard...</p>
+    </div>
+
+    <!-- Top Sticky Bar Container -->
+    <div class="w-full sticky top-0 z-[100] flex flex-col items-center">
+        <!-- Stock Ticker at Top -->
+        <div class="w-full bg-slate-950 border-b border-slate-800 py-2 overflow-hidden">
+            <div class="animate-marquee">
+                <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-GLUCK: +15.4% ▲</span>
+                <span class="text-[10px] font-bold text-red-400 mx-4">LBS-JOE: -2.1% ▼</span>
+                <span class="text-[10px] font-bold text-emerald-400 mx-4">LBS-RYAN: +42.8% ▲</span>
+                <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-KEV: HOLD</span>
+                <span class="text-[10px] font-bold text-purple-400 mx-4">LBS-MEEK: EXPONENTIAL</span>
+                <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-MIKE: VOLATILE</span>
+                <span class="text-[10px] font-bold text-blue-400 mx-4">LBS-GLUCK: +15.4% ▲</span>
+            </div>
+        </div>
+
+        <!-- Big Admin Login Button below Ticker -->
+        <div class="w-full bg-slate-900/50 backdrop-blur-md border-b border-slate-800 py-3 flex justify-center">
+            <button onclick="togglePanic()" class="px-8 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-full text-[10px] text-slate-300 font-black uppercase tracking-[0.2em] transition-all active:scale-95 shadow-lg">
+                Secure Admin Access (Panic Mode)
+            </button>
         </div>
     </div>
 
@@ -142,7 +214,7 @@
         </div>
     </section>
 
-    <main class="w-full max-w-2xl space-y-12 pb-12 px-4">
+    <main id="mainContent" class="w-full max-w-2xl space-y-12 pb-12 px-4">
         
         <!-- Main Counter Display -->
         <section class="glass-card rounded-[2.5rem] p-8 flex flex-col items-center justify-center shadow-2xl relative overflow-hidden">
@@ -282,7 +354,16 @@
     </div>
 
     <script>
-        // Employee of the Month - Picks a random frame on load
+        // Panic Mode State
+        let isPanicked = false;
+
+        function togglePanic() {
+            isPanicked = !isPanicked;
+            const panicScreen = document.getElementById('panicScreen');
+            panicScreen.style.display = isPanicked ? 'block' : 'none';
+        }
+
+        // Employee of the Month
         window.onload = function() {
             const assets = document.querySelectorAll('.asset-frame');
             if (assets.length > 0) {
@@ -296,7 +377,7 @@
             const toast = document.getElementById('toast');
             toast.innerText = `${name}: BOOM LOGGED`;
             toast.style.opacity = '1';
-            
+
             const display = document.getElementById('counterDisplay');
             display.style.transform = 'scale(1.05)';
             
