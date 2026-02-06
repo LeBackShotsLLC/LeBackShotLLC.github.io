@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeBackShotsLLC | Official Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .counter-glow {
+            text-shadow: 0 0 40px rgba(59, 130, 246, 0.7);
+        }
+
+        .x-mark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 2rem;
+            color: #f43f5e;
+            font-weight: 900;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .day-box {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 6px;
+            position: relative;
+            font-weight: bold;
+        }
+
+        .asset-frame {
+            border: 2px solid rgba(71, 85, 105, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .asset-frame:hover {
+            border-color: #3b82f6;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <!-- Header & Quote -->
+    <header class="w-full max-w-6xl text-center mb-10">
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-indigo-400 to-purple-500">
+            LeBackShotsLLC
+        </h1>
+        <div class="inline-block p-4 glass-card rounded-2xl border-l-4 border-indigo-500 italic text-indigo-200 text-lg shadow-2xl">
+            "Make me this app and you get 10 percent of the profits"
+        </div>
+    </header>
+
+    <main class="w-full max-w-7xl grid grid-cols-1 xl:grid-cols-6 gap-8">
+        
+        <!-- Counter Section (Locked) -->
+        <section class="xl:col-span-4 glass-card rounded-[2.5rem] p-6 md:p-12 flex flex-col items-center justify-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-transparent"></div>
+            
+            <h2 class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 mb-10">Consolidated Holdings Count</h2>
+            
+            <!-- Surround Photo Layout -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
+                
+                <!-- Left Flank (2 Images) -->
+                <div class="flex flex-row md:flex-col gap-4">
+                    <div class="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden asset-frame shadow-xl">
+                        <img src="meek1.jpg" alt="Asset 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=200'">
+                    </div>
+                    <div class="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden asset-frame shadow-xl">
+                        <img src="gluck1.jpg" alt="Asset 2" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=200'">
+                    </div>
+                </div>
+
+                <!-- Central Metric -->
+                <div class="relative group">
+                    <div id="counterDisplay" class="text-[12rem] md:text-[18rem] font-black counter-glow text-white leading-none select-none">
+                        5
+                    </div>
+                    <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1 bg-blue-600 rounded text-[10px] font-black uppercase tracking-widest">
+                        Verified
+                    </div>
+                </div>
+
+                <!-- Right Flank (3 Images) -->
+                <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
+                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
+                        <img src="ryan1.jpg" alt="Asset 3" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=200'">
+                    </div>
+                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
+                        <img src="joe1.jpg" alt="Asset 4" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?auto=format&fit=crop&q=80&w=200'">
+                    </div>
+                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl col-span-2 md:col-span-1">
+                        <img src="liam1.jpg" alt="Asset 5" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=200'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 px-8 py-3 bg-slate-950 rounded-full border border-slate-800 text-slate-400 text-[10px] font-bold tracking-[0.4em] uppercase">
+                Database Status: Read-Only / Immutable
+            </div>
+        </section>
+
+        <!-- Calendar Section -->
+        <section class="xl:col-span-2 glass-card rounded-[2.5rem] p-8 flex flex-col shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-transparent"></div>
+            
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-sm font-black uppercase tracking-widest text-slate-400">Feb Schedule</h2>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Live</span>
+                </div>
+            </div>
+            
+            <div class="calendar-grid text-center text-[10px] font-black text-slate-600 mb-4">
+                <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+            </div>
+
+            <div id="calendarContainer" class="calendar-grid mb-8">
+                <!-- Days populated by JS -->
+            </div>
+
+            <div class="mt-auto space-y-3">
+                <div class="flex items-center gap-4 text-[11px] text-slate-400 bg-slate-900/60 p-4 rounded-2xl border border-slate-800">
+                    <div class="shrink-0 w-6 h-6 bg-red-500/10 border border-red-500/40 flex items-center justify-center text-xs font-black text-red-500 rounded-lg">X</div>
+                    <span class="leading-tight uppercase tracking-tighter">Priority Day Identified by Algorithm</span>
+                </div>
+                <div class="text-[9px] text-center text-slate-600 uppercase font-bold tracking-widest">
+                    Selection Logic: Locked
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-16 text-slate-600 text-[10px] font-bold tracking-[0.2em] uppercase text-center">
+        &copy; 2024 LEBACKSHOTSLLC Global Operations. <br class="md:hidden"> Unauthorized modification is strictly prohibited.
+    </footer>
+
+    <script>
+        window.onload = function() {
+            generateFebruary();
+        };
+
+        function generateFebruary() {
+            const container = document.getElementById('calendarContainer');
+            const totalDays = 28; 
+            
+            // Randomly select 10 unique days for the 'X'
+            const markedDays = new Set();
+            while(markedDays.size < 10) {
+                markedDays.add(Math.floor(Math.random() * totalDays) + 1);
+            }
+
+            for (let i = 1; i <= totalDays; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day-box border border-slate-800/30 hover:bg-slate-800/60 transition-all cursor-default';
+                
+                dayDiv.innerHTML = `<span class="text-slate-600 text-[9px] absolute top-1 left-1 font-black">${i}</span>`;
+                
+                if (markedDays.has(i)) {
+                    const xMark = document.createElement('div');
+                    xMark.className = 'x-mark';
+                    xMark.innerText = 'X';
+                    dayDiv.appendChild(xMark);
+                    dayDiv.classList.add('bg-red-500/5');
+                    dayDiv.classList.replace('border-slate-800/30', 'border-red-500/30');
+                }
+                
+                container.appendChild(dayDiv);
+            }
+        }
+    </script>
+</body>
+</html>
