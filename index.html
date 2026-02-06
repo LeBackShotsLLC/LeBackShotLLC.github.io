@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeBackShotsLLC | Official Dashboard</title>
+    <title>LeBackShotsLLC | Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -12,6 +12,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #020617;
             color: #f8fafc;
+            overflow-x: hidden;
         }
 
         .glass-card {
@@ -21,184 +22,160 @@
         }
 
         .counter-glow {
-            text-shadow: 0 0 40px rgba(59, 130, 246, 0.7);
-        }
-
-        .x-mark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            font-size: 2rem;
-            color: #f43f5e;
-            font-weight: 900;
-            opacity: 0.9;
-            pointer-events: none;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-        }
-
-        .day-box {
-            aspect-ratio: 1 / 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(30, 41, 59, 0.4);
-            border-radius: 6px;
-            position: relative;
-            font-weight: bold;
+            text-shadow: 0 0 50px rgba(59, 130, 246, 0.8);
         }
 
         .asset-frame {
-            border: 2px solid rgba(71, 85, 105, 0.5);
-            transition: all 0.3s ease;
+            border: 3px solid rgba(71, 85, 105, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .asset-frame:hover {
+        .asset-frame:active {
+            transform: scale(0.95);
             border-color: #3b82f6;
-            transform: scale(1.05);
+        }
+
+        /* Ensure images maintain a clean square aspect ratio */
+        .image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+        }
+
+        .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .verified-badge {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+<body class="min-h-screen flex flex-col items-center p-4">
 
-    <!-- Header & Quote -->
-    <header class="w-full max-w-6xl text-center mb-10">
-        <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-indigo-400 to-purple-500">
+    <!-- Header & Business Quote -->
+    <header class="w-full max-w-2xl text-center mt-6 mb-8">
+        <h1 class="text-5xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-indigo-400 to-purple-500 uppercase">
             LeBackShotsLLC
         </h1>
-        <div class="inline-block p-4 glass-card rounded-2xl border-l-4 border-indigo-500 italic text-indigo-200 text-lg shadow-2xl">
+        <div class="inline-block p-4 glass-card rounded-2xl border-l-4 border-indigo-500 italic text-indigo-200 text-sm md:text-base shadow-2xl mx-2">
             "Make me this app and you get 10 percent of the profits"
         </div>
     </header>
 
-    <main class="w-full max-w-7xl grid grid-cols-1 xl:grid-cols-6 gap-8">
+    <main class="w-full max-w-2xl space-y-8 pb-12">
         
-        <!-- Counter Section (Locked) -->
-        <section class="xl:col-span-4 glass-card rounded-[2.5rem] p-6 md:p-12 flex flex-col items-center justify-center shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-transparent"></div>
+        <!-- Main Counter Display -->
+        <section class="glass-card rounded-[2.5rem] p-8 flex flex-col items-center justify-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500"></div>
             
-            <h2 class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 mb-10">Consolidated Holdings Count</h2>
+            <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 mb-2">Total Verified Count</h2>
             
-            <!-- Surround Photo Layout -->
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-8 w-full">
-                
-                <!-- Left Flank (3 Images) -->
-                <div class="grid grid-cols-3 lg:grid-cols-1 gap-4">
-                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
-                        <img src="gluck1.jpg" alt="Gluck 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
-                        <img src="joe1.jpg" alt="Joe 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
-                        <img src="kev1.jpg" alt="Kev 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=200'">
-                    </div>
+            <div class="relative">
+                <div id="counterDisplay" class="text-[12rem] font-black counter-glow text-white leading-none select-none">
+                    7
                 </div>
-
-                <!-- Central Metric -->
-                <div class="relative group">
-                    <div id="counterDisplay" class="text-[14rem] md:text-[20rem] font-black counter-glow text-white leading-none select-none">
-                        6
-                    </div>
-                    <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1 bg-blue-600 rounded text-[10px] font-black uppercase tracking-widest">
-                        Verified
-                    </div>
-                </div>
-
-                <!-- Right Flank (3 Images) -->
-                <div class="grid grid-cols-3 lg:grid-cols-1 gap-4">
-                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
-                        <img src="liam1.jpg" alt="Liam 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
-                        <img src="meek1.jpg" alt="Meek 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden asset-frame shadow-xl">
-                        <img src="mike1.jpg" alt="Mike 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-12 px-8 py-3 bg-slate-950 rounded-full border border-slate-800 text-slate-400 text-[10px] font-bold tracking-[0.4em] uppercase">
-                Database Status: Read-Only / Immutable
-            </div>
-        </section>
-
-        <!-- Calendar Section -->
-        <section class="xl:col-span-2 glass-card rounded-[2.5rem] p-8 flex flex-col shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-transparent"></div>
-            
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-sm font-black uppercase tracking-widest text-slate-400">Feb Schedule</h2>
-                <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Live</span>
-                </div>
-            </div>
-            
-            <div class="calendar-grid text-center text-[10px] font-black text-slate-600 mb-4">
-                <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
-            </div>
-
-            <div id="calendarContainer" class="calendar-grid mb-8">
-                <!-- Days populated by JS -->
-            </div>
-
-            <div class="mt-auto space-y-3">
-                <div class="flex items-center gap-4 text-[11px] text-slate-400 bg-slate-900/60 p-4 rounded-2xl border border-slate-800">
-                    <div class="shrink-0 w-6 h-6 bg-red-500/10 border border-red-500/40 flex items-center justify-center text-xs font-black text-red-500 rounded-lg">X</div>
-                    <span class="leading-tight uppercase tracking-tighter">Priority Day Identified by Algorithm</span>
-                </div>
-                <div class="text-[9px] text-center text-slate-600 uppercase font-bold tracking-widest">
-                    Selection Logic: Locked
+                <div class="verified-badge absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-6 py-1.5 bg-blue-600 rounded-full text-[12px] font-black uppercase tracking-widest shadow-lg">
+                    Official
                 </div>
             </div>
         </section>
 
+        <!-- Personnel/Asset Gallery -->
+        <section class="space-y-4">
+            <h3 class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 text-center">Active Assets</h3>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Asset 1: Gluck -->
+                <div class="asset-frame rounded-3xl overflow-hidden bg-slate-900 shadow-xl">
+                    <div class="image-container">
+                        <img src="gluck1.jpg" alt="Gluck" onerror="this.src='https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="p-3 text-center bg-slate-800/50 border-t border-slate-700">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">GLUCK</span>
+                    </div>
+                </div>
+
+                <!-- Asset 2: Joe -->
+                <div class="asset-frame rounded-3xl overflow-hidden bg-slate-900 shadow-xl">
+                    <div class="image-container">
+                        <img src="joe1.jpg" alt="Joe" onerror="this.src='https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="p-3 text-center bg-slate-800/50 border-t border-slate-700">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">JOE</span>
+                    </div>
+                </div>
+
+                <!-- Asset 3: Kev -->
+                <div class="asset-frame rounded-3xl overflow-hidden bg-slate-900 shadow-xl">
+                    <div class="image-container">
+                        <img src="kev1.jpg" alt="Kev" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="p-3 text-center bg-slate-800/50 border-t border-slate-700">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">KEV</span>
+                    </div>
+                </div>
+
+                <!-- Asset 4: Liam -->
+                <div class="asset-frame rounded-3xl overflow-hidden bg-slate-900 shadow-xl">
+                    <div class="image-container">
+                        <img src="liam1.jpg" alt="Liam" onerror="this.src='https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="p-3 text-center bg-slate-800/50 border-t border-slate-700">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">LIAM</span>
+                    </div>
+                </div>
+
+                <!-- Asset 5: Meek -->
+                <div class="asset-frame rounded-3xl overflow-hidden bg-slate-900 shadow-xl">
+                    <div class="image-container">
+                        <img src="meek1.jpg" alt="Meek" onerror="this.src='https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="p-3 text-center bg-slate-800/50 border-t border-slate-700">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">MEEK</span>
+                    </div>
+                </div>
+
+                <!-- Asset 6: Mike -->
+                <div class="asset-frame rounded-3xl overflow-hidden bg-slate-900 shadow-xl">
+                    <div class="image-container">
+                        <img src="mike1.jpg" alt="Mike" onerror="this.src='https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="p-3 text-center bg-slate-800/50 border-t border-slate-700">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">MIKE</span>
+                    </div>
+                </div>
+
+                <!-- Asset 7: Ryan (Full Width on Grid) -->
+                <div class="asset-frame rounded-3xl overflow-hidden bg-slate-900 shadow-xl col-span-2">
+                    <div class="image-container" style="padding-top: 50%;">
+                        <img src="ryan1.jpg" alt="Ryan" onerror="this.src='https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&q=80&w=800'">
+                    </div>
+                    <div class="p-4 text-center bg-slate-800/50 border-t border-slate-700">
+                        <span class="text-xs font-black uppercase tracking-[0.2em] text-blue-400">RYAN</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="px-8 py-3 bg-slate-950 rounded-2xl border border-slate-800 text-slate-500 text-[9px] font-bold tracking-[0.3em] uppercase text-center">
+            Database Status: Immutable / High-Security
+        </div>
     </main>
 
-    <footer class="mt-16 text-slate-600 text-[10px] font-bold tracking-[0.2em] uppercase text-center">
-        &copy; 2024 LEBACKSHOTSLLC Global Operations. <br class="md:hidden"> Unauthorized modification is strictly prohibited.
+    <footer class="mt-4 pb-8 text-slate-600 text-[10px] font-bold tracking-[0.2em] uppercase text-center">
+        &copy; 2024 LEBACKSHOTSLLC <br> Authorized Access Only
     </footer>
 
-    <script>
-        window.onload = function() {
-            generateFebruary();
-        };
-
-        function generateFebruary() {
-            const container = document.getElementById('calendarContainer');
-            const totalDays = 28; 
-            
-            // Randomly select 10 unique days for the 'X'
-            const markedDays = new Set();
-            while(markedDays.size < 10) {
-                markedDays.add(Math.floor(Math.random() * totalDays) + 1);
-            }
-
-            for (let i = 1; i <= totalDays; i++) {
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'day-box border border-slate-800/30 hover:bg-slate-800/60 transition-all cursor-default';
-                
-                dayDiv.innerHTML = `<span class="text-slate-600 text-[9px] absolute top-1 left-1 font-black">${i}</span>`;
-                
-                if (markedDays.has(i)) {
-                    const xMark = document.createElement('div');
-                    xMark.className = 'x-mark';
-                    xMark.innerText = 'X';
-                    dayDiv.appendChild(xMark);
-                    dayDiv.classList.add('bg-red-500/5');
-                    dayDiv.classList.replace('border-slate-800/30', 'border-red-500/30');
-                }
-                
-                container.appendChild(dayDiv);
-            }
-        }
-    </script>
 </body>
 </html>
